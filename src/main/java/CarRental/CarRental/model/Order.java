@@ -14,9 +14,17 @@ public class Order {
     private Long orderNumber;
 
 
+    @OneToOne
+    private Customer customer;
+
+    @OneToOne
+    private Car car;
+
+
+
+
     public Order() {
     }
-
     public Order(int id, Long orderNumber) {
         this.id = id;
         this.orderNumber = orderNumber;
