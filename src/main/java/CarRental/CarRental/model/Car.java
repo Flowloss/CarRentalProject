@@ -1,72 +1,71 @@
 package CarRental.CarRental.model;
 
+
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "car")
-public class Car {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+        @Entity
+        public class Car {
+            @Id
+            @GeneratedValue(strategy = GenerationType.IDENTITY)
+            private Long id;
 
-    private String make;
-    private String model;
-    private String registrationNumber;
-    private double pricePerDay;
+            private String brand;
+            private String model;
+            private String registrationNumber;
+            private double pricePerDay;
+            private boolean booked;
 
-    // Constructors, getters, and setters
-    // Constructors, getters, and setters
-    // Constructors, getters, and setters
+            // Getters and setters
 
-    // Constructors
-    public Car() {
-    }
+            public Long getId() {
+                return id;
+            }
 
-    public Car(String make, String model, String registrationNumber, double pricePerDay) {
-        this.make = make;
-        this.model = model;
-        this.registrationNumber = registrationNumber;
-        this.pricePerDay = pricePerDay;
-    }
+            public void setId(Long id) {
+                this.id = id;
+            }
 
-    // Getters and Setters
-    public int getId() {
-        return id;
-    }
+            public String getBrand() {
+                return brand;
+            }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+            public void setBrand(String brand) {
+                this.brand = brand;
 
-    public String getMake() {
-        return make;
-    }
+            }
 
-    public void setMake(String make) {
-        this.make = make;
-    }
+            public String getModel() {
+                return model;
+            }
 
-    public String getModel() {
-        return model;
-    }
+            public void setModel(String model) {
+                this.model = model;
+            }
 
-    public void setModel(String model) {
-        this.model = model;
-    }
+            public String getRegistrationNumber() {
+                return registrationNumber;
+            }
 
-    public String getRegistrationNumber() {
-        return registrationNumber;
-    }
+            public void setRegistrationNumber(String registrationNumber) {
+                this.registrationNumber = registrationNumber;
+            }
 
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
-    }
+            public double getPricePerDay() {
+                return pricePerDay;
+            }
 
-    public double getPricePerDay() {
-        return pricePerDay;
-    }
+            public void setPricePerDay(double pricePerDay) {
+                this.pricePerDay = pricePerDay;
+            }
 
-    public void setPricePerDay(double pricePerDay) {
-        this.pricePerDay = pricePerDay;
+
+            public boolean isBooked() {
+                return booked;
+            }
+
+            public void setBooked(boolean booked) {
+                this.booked = booked;
+            }
+        }
     }
 }
