@@ -1,7 +1,7 @@
 package CarRental.CarRental.controller;
 
 import CarRental.CarRental.model.Customer;
-import CarRental.CarRental.service.CustomerService;
+import CarRental.CarRental.service.CustomerServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 public class CustomerController {
     @Autowired
-    CustomerService customerService;
+    CustomerServiceInterface customerService;
 
     @GetMapping("/api/v1/customers")
     public ResponseEntity<List<Customer>> getAllCustomers() {

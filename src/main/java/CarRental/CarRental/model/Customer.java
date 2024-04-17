@@ -15,7 +15,7 @@ public class Customer {
     private String address;
     @Column(name = "email", nullable = false)
     private String email;
-    @Column(name = "phone_no", nullable = false)
+    @Column(name = "phone", nullable = false)
     private String phone;
 
     // Constructors, getters, and setters
