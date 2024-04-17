@@ -5,7 +5,6 @@ package CarRental.CarRental.controller;
         private int customerId;
         private int carId;
 
-        // Getters and setters
         public int getCustomerId() {
             return customerId;
         }

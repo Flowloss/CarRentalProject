@@ -3,7 +3,6 @@ package CarRental.CarRental.model;
 import jakarta.persistence.*;
 
 import java.sql.Date;
-import java.util.Random;
 
 @Entity
 @Table(name = "booking")
@@ -11,8 +10,9 @@ public class Bookings {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private Date orderDate;
+    private boolean active;
 
-    private Date orderDate; // Order date field
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
@@ -27,7 +27,13 @@ public class Bookings {
 
 
 
+    public boolean isActive() {
+        return active;
+    }
 
+    public void setActive(boolean active) {
+        this.active = active;
+    }
     public Date getOrderDate() {
         return orderDate;
     }

@@ -4,8 +4,6 @@ import CarRental.CarRental.model.Bookings;
 import CarRental.CarRental.model.Car;
 import CarRental.CarRental.model.Customer;
 import CarRental.CarRental.repositories.BookingRepository;
-import CarRental.CarRental.repositories.CarRepository;
-import CarRental.CarRental.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,18 +17,6 @@ public class BookingService implements BookingServiceInterface {
 
     @Autowired
     private BookingRepository bookingRepository;
-
-    @Autowired
-    private CarRepository carRepository;
-
-    @Autowired
-    private CustomerRepository customerRepository;
-
-
-    @Override
-    public List<Bookings> getBookingsByCarId(int carId) {
-        return null;
-    }
 
     @Override
     public List<Bookings> getAllOrders() {
@@ -50,7 +36,7 @@ public class BookingService implements BookingServiceInterface {
         return optionalOrder.orElse(null);
     }
 
-    public void saveBooking(Bookings newBooking, Customer customer, Car car) {
+    public void ordercar(Bookings newBooking, Customer customer, Car car) {
         // Set the customer and car for the new booking
         newBooking.setCustomer(customer);
         newBooking.setCar(car);
@@ -58,7 +44,23 @@ public class BookingService implements BookingServiceInterface {
         // Set the order date to the current date and time
         newBooking.setOrderDate(new Date(Calendar.getInstance().getTimeInMillis()));
 
+        // Set the booking as active
+        newBooking.setActive(true);
+
         // Save the booking
         bookingRepository.save(newBooking);
+    }
+
+    public List<Bookings> getMyOrders(int customerId) {
+        // Retrieve all orders (active and inactive) for the specified customer
+        return bookingRepository.findByCustomerId(customerId);
+    }
+
+    public void cancelBooking(int bookingId) {
+        Optional<Bookings> optionalBooking = bookingRepository.findById(bookingId);
+        optionalBooking.ifPresent(booking -> {
+            booking.setActive(false);
+            bookingRepository.save(booking);
+        });
     }
 }
