@@ -67,5 +67,4 @@ import jakarta.persistence.*;
                 this.booked = booked;
             }
         }
-    }
-}
+
