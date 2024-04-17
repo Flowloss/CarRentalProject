@@ -2,6 +2,7 @@ package CarRental.CarRental.model;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
 import java.util.Random;
 
 @Entity
@@ -11,51 +12,34 @@ public class Bookings {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private Long orderNumber;
+    private Date orderDate; // Order date field
 
-    @Column(name = "booking_date")
-    private String bookingDate;
-
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "car_id")
     private Car car;
 
-    // Constructors, getters, and setters
-    // Constructors, getters, and setters
-    // Constructors, getters, and setters
-
-    // Constructors
     public Bookings() {
-        this.orderNumber = generateOrderNumber();
     }
 
-    // Getters and Setters
+
+
+
+    public Date getOrderDate() {
+        return orderDate;
+    }
+    public void setOrderDate(Date orderDate) {
+        this.orderDate = orderDate;
+    }
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public Long getOrderNumber() {
-        return orderNumber;
-    }
-
-    public void setOrderNumber(Long orderNumber) {
-        this.orderNumber = orderNumber;
-    }
-
-    public String getBookingDate() {
-        return bookingDate;
-    }
-
-    public void setBookingDate(String bookingDate) {
-        this.bookingDate = bookingDate;
     }
 
     public Customer getCustomer() {
@@ -72,14 +56,6 @@ public class Bookings {
 
     public void setCar(Car car) {
         this.car = car;
-    }
-
-    // Method to generate a random order number
-    private Long generateOrderNumber() {
-        Random random = new Random();
-        long min = 100000000000L;
-        long max = 999999999999L;
-        return min + ((long) (random.nextDouble() * (max - min)));
     }
 }
 
