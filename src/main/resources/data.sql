@@ -2,8 +2,8 @@
 INSERT INTO customer (name, address, email, phone)
 VALUES ('John Doe', '123 Main St', 'john.doe@example.com', '123-456-7890');
 
--- Inserting a car
-INSERT INTO car (make, model, registrationNumber, pricePerDay)
+--Inserting a car
+INSERT INTO car (brand, model, registrationNumber, pricePerDay)
 VALUES ('Toyota', 'Camry', 'ABC123', 50.00);
 
 -- Inserting an order
