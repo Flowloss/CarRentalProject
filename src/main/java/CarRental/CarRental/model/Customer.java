@@ -1,5 +1,4 @@
 package CarRental.CarRental.model;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -18,6 +17,9 @@ public class Customer {
     @Column(name = "phone", nullable = false)
     private String phone;
 
+    // Constructors, getters, and setters
+    // Constructors, getters, and setters
+    // Constructors, getters, and setters
 
     // Constructors
     public Customer() {
@@ -69,5 +71,12 @@ public class Customer {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public boolean validate(){
+        if(name != null && address != null && email != null && phone !=null){
+            return true;
+        }
+        return false;
     }
 }
