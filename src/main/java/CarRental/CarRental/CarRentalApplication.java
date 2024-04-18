@@ -10,4 +10,8 @@ public class CarRentalApplication {
 		SpringApplication.run(CarRentalApplication.class, args);
 	}
 
+	//SELECT * FROM customer;
+	//SELECT * FROM car;
+	//SELECT * FROM booking
+
 }
