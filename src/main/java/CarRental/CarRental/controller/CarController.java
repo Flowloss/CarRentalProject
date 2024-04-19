@@ -29,12 +29,12 @@ public class CarController {
     }
 
     @PutMapping("/{id}")
-    public Car updateCar(@PathVariable int id, @RequestBody Car car) {
+    public Car updateCar(@PathVariable long id, @RequestBody Car car) {
         return carService.updateCar(id, car);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCar(@PathVariable int id) {
+    public void deleteCar(@PathVariable long id) {
         carService.deleteCar(id);
     }
 }

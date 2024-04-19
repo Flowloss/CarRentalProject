@@ -66,16 +66,5 @@ import jakarta.persistence.*;
             public void setBooked(boolean booked) {
                 this.booked = booked;
             }
-<<<<<<< HEAD
-        }
-=======
 
         }
-
-<<<<<<< HEAD
-
-        }
-
->>>>>>> 153c52c09b511e2c5f4bb0df4aac83bb96d077e7
-=======
->>>>>>> 30acaa7944509dbbb01cf8b274cc0bda99ecc5d4
