@@ -6,7 +6,7 @@ VALUES
 ('Bob Brown', '321 Pine St', 'bob.brown@example.com', '777-777-7777'),
 ('Emily Davis', '654 Birch St', 'emily.davis@example.com', '999-999-9999');
 
---Inserting a car
+
 INSERT INTO car (brand, model, registrationNumber, pricePerDay, booked)
 VALUES
 ('Toyota', 'Camry', 'ABC123', 50.00, true),

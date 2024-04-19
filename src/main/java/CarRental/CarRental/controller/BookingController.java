@@ -24,7 +24,7 @@ public class BookingController {
     private  BookingServiceInterface bookingServiceInterface;
 
     @Autowired
-    private  CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
     private  CarRepository carRepository;
