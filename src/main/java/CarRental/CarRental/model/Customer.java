@@ -1,5 +1,4 @@
 package CarRental.CarRental.model;
-
 import jakarta.persistence.*;
 
 @Entity
