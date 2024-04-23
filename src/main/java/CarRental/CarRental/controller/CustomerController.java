@@ -1,6 +1,9 @@
 package CarRental.CarRental.controller;
 
+import CarRental.CarRental.Exceptions.ResourceNotFoundException;
 import CarRental.CarRental.model.Customer;
+import CarRental.CarRental.repositories.CustomerRepository;
+import CarRental.CarRental.service.CustomerService;
 import CarRental.CarRental.service.CustomerServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,26 +17,32 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class CustomerController {
     @Autowired
-    CustomerServiceInterface customerService;
+    CustomerService customerService;
+    @Autowired
+    CustomerRepository customerRepository;
 
     @GetMapping("/customers")
     public ResponseEntity<List<Customer>> getAllCustomers() {
         return ResponseEntity.ok(customerService.getCustomers());
     }
 
-    @PostMapping(value = "/addCustomer")
+    @PostMapping("/addCustomer")
+    public ResponseEntity<Customer> addNewCustomer(@RequestBody Customer customer) {
 
-    public ResponseEntity<Customer> addNewCustomer(@Validated @RequestBody Customer customer) {
-        return ResponseEntity.ok(customerService.addCustomer(customer));
-        //customer =customerService.addCustomer(customer);
-       //return ResponseEntity.status(HttpStatus.CREATED).body(customer);
+        if (customer.validate()) {
+
+            //return ResponseEntity.ok(customerService.addCustomer(customer));
+            Customer addedcustomer = customerService.addCustomer(customer);
+            return ResponseEntity.status(HttpStatus.CREATED).body(addedcustomer);
+        }
+        return ResponseEntity.badRequest().build();
     }
     @PutMapping("/updateCustomer/{id}")
-    public ResponseEntity<Customer> updateCustomer(@Validated @RequestBody Customer customer, @PathVariable int id) {
+    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer, @PathVariable int id) {
         return ResponseEntity.ok(customerService.updateCustomer(customer, id));
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/deleteCustomer/{id}")
     public ResponseEntity<Boolean> deleteCustomer(@PathVariable int id) {
         return ResponseEntity.ok(customerService.deleteCustomer(id));
     }

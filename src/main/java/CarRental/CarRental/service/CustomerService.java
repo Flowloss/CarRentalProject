@@ -11,9 +11,13 @@ import java.util.Optional;
 @Service
 
 public class CustomerService implements CustomerServiceInterface {
-    @Autowired
-    CustomerRepository customerRepository;
 
+    private final CustomerRepository customerRepository;
+
+    @Autowired
+    public CustomerService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
     @Override
     public List<Customer> getCustomers() {
         return customerRepository.findAll();
@@ -38,7 +42,6 @@ public class CustomerService implements CustomerServiceInterface {
             updatedCustomer.setName(customer.getName());
             updatedCustomer.setEmail(customer.getEmail());
             updatedCustomer.setAddress(customer.getAddress());
-            updatedCustomer.setId(customer.getId());
             updatedCustomer.setPhone(customer.getPhone());
             return customerRepository.save(updatedCustomer);
         }
