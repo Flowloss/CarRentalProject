@@ -14,35 +14,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1")
 public class CustomerController {
     @Autowired
-    CustomerService customerService;
-    @Autowired
-    CustomerRepository customerRepository;
+    CustomerServiceInterface customerService;
 
-    @GetMapping("/customers")
+    @GetMapping("/api/v1/customers")
     public ResponseEntity<List<Customer>> getAllCustomers() {
         return ResponseEntity.ok(customerService.getCustomers());
     }
 
-    @PostMapping("/addCustomer")
-    public ResponseEntity<Customer> addNewCustomer(@RequestBody Customer customer) {
-
-        if (customer.validate()) {
-
-            //return ResponseEntity.ok(customerService.addCustomer(customer));
-            Customer addedcustomer = customerService.addCustomer(customer);
-            return ResponseEntity.status(HttpStatus.CREATED).body(addedcustomer);
-        }
-        return ResponseEntity.badRequest().build();
+    @PostMapping("/api/v1/addCustomer")
+    public ResponseEntity<Customer> addNewCustomer(@Validated @RequestBody Customer customer) {
+        return ResponseEntity.ok(customerService.addCustomer(customer));
     }
-    @PutMapping("/updateCustomer/{id}")
-    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer, @PathVariable int id) {
+
+    @PutMapping("/api/v1/updateCustomer/{id}")
+    public ResponseEntity<Customer> upDateCustomer(@Validated @RequestBody Customer customer, @PathVariable int id) {
         return ResponseEntity.ok(customerService.updateCustomer(customer, id));
     }
 
-    @DeleteMapping("/deleteCustomer/{id}")
+    @DeleteMapping("/api/v1/deleteCustomer/{id}")
     public ResponseEntity<Boolean> deleteCustomer(@PathVariable int id) {
         return ResponseEntity.ok(customerService.deleteCustomer(id));
     }

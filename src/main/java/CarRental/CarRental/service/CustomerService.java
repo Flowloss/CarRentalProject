@@ -1,8 +1,10 @@
 package CarRental.CarRental.service;
 
+import CarRental.CarRental.Exceptions.ResourceNotFoundException;
 import CarRental.CarRental.model.Customer;
 import CarRental.CarRental.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,7 +27,7 @@ public class CustomerService implements CustomerServiceInterface {
 
     @Override
     public Customer getCustomer(int id) {
-        return customerRepository.findById(id).orElse(null);
+        return customerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Customer", "id", customerRepository.existsById(id)));
     }
 
     @Override
@@ -45,15 +47,20 @@ public class CustomerService implements CustomerServiceInterface {
             updatedCustomer.setPhone(customer.getPhone());
             return customerRepository.save(updatedCustomer);
         }
-        return null; // Or throw an exception if customer not found
+        throw new ResourceNotFoundException("Customer","id",customer.getId());
     }
 
     @Override
     public boolean deleteCustomer(int id) {
-        if (customerRepository.existsById(id)) {
-            customerRepository.deleteById(id);
-            return true;
+        try {
+            if(customerRepository.existsById(id)) {
+                customerRepository.deleteById(id);
+                return true;
+            }
+        } catch (EmptyResultDataAccessException ex) {
+            return false;
+
         }
-        return false;
+        throw new ResourceNotFoundException("Customer", "id", id);
     }
 }
