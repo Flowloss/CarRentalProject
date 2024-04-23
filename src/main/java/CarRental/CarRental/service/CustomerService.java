@@ -9,9 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CustomerService implements CustomerServiceInterface{
+
+public class CustomerService implements CustomerServiceInterface {
     @Autowired
     CustomerRepository customerRepository;
+
     @Override
     public List<Customer> getCustomers() {
         return customerRepository.findAll();
@@ -19,40 +21,33 @@ public class CustomerService implements CustomerServiceInterface{
 
     @Override
     public Customer getCustomer(int id) {
-        if(customerRepository.existsById(id)){
-            Optional<Customer> customer = customerRepository.findById(id);
-            if(customer.isPresent()){
-                return customer.get();
-            }
-        }
-        return null; // need to set exception handling
-
+        return customerRepository.findById(id).orElse(null);
     }
 
     @Override
     public Customer addCustomer(Customer customer) {
-       if(customer.getId()== 0){
-           customerRepository.save(customer);
 
-       }
-       return null; // exception handling
+        return customerRepository.save(customer);
     }
 
     @Override
-    public Customer upDateCustomer(Customer customer, int id) {
-        Optional<Customer>customerToUpdate = customerRepository.findById(id);{
-            if (customerToUpdate.isPresent()){
-
-            }
-            return customerRepository.save(customerToUpdate.get());
+    public Customer updateCustomer(Customer customer, int id) {
+        Optional<Customer> customerToUpdate = customerRepository.findById(id);
+        if (customerToUpdate.isPresent()) {
+            Customer updatedCustomer = customerToUpdate.get();
+            updatedCustomer.setName(customer.getName());
+            updatedCustomer.setEmail(customer.getEmail());
+            updatedCustomer.setAddress(customer.getAddress());
+            updatedCustomer.setId(customer.getId());
+            updatedCustomer.setPhone(customer.getPhone());
+            return customerRepository.save(updatedCustomer);
         }
-       // exceptions
-
+        return null; // Or throw an exception if customer not found
     }
 
     @Override
     public boolean deleteCustomer(int id) {
-        if(customerRepository.existsById(id)){
+        if (customerRepository.existsById(id)) {
             customerRepository.deleteById(id);
             return true;
         }
