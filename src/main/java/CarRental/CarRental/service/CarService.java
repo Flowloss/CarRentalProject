@@ -26,7 +26,7 @@ public class CarService {
         return carRepository.save(car);
     }
 
-    public Car updateCar(Long id, Car car) {
+    public Car updateCar(int id, Car car) {
         // Här kan du lägga till validering eller annan logik innan du uppdaterar bilen
         Car existingCar = carRepository.findById(Math.toIntExact(id)).orElse(null);
         if (existingCar != null) {
@@ -42,7 +42,7 @@ public class CarService {
         }
     }
 
-    public void deleteCar(Long id) {
+    public void deleteCar(int id) {
         carRepository.deleteById(Math.toIntExact(id));
     }
 }

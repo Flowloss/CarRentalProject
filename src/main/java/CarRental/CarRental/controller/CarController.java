@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/cars")
+@RequestMapping("/api/v1/")
 public class CarController {
 
     private final CarService carService;
@@ -18,12 +18,12 @@ public class CarController {
         this.carService = carService;
     }
 
-    @GetMapping
+    @GetMapping("/cars")
     public List<Car> getAllCars() {
         return carService.getAllCars();
     }
 
-    @PostMapping
+    @PostMapping("addcar")
     public Car addCar(@RequestBody Car car) {
         return carService.addCar(car);
     }

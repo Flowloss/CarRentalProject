@@ -41,9 +41,9 @@ public class BookingController {
     }
 
 
-    @DeleteMapping("/deleteorder/{orderId}")
-    public ResponseEntity<String> deleteOrder(@PathVariable int orderId) {
-        bookingService.deleteOrder(orderId);
+    @DeleteMapping("/deleteorder/{bookingId}")
+    public ResponseEntity<String> deleteOrder(@PathVariable int bookingId) {
+        bookingService.deleteOrder(bookingId);
         return ResponseEntity.ok("Order raderad.");
     }
 
