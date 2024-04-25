@@ -1,6 +1,6 @@
 package CarRental.CarRental.controller;
 
-import CarRental.CarRental.Exceptions.ResourceNotFoundException;
+import CarRental.CarRental.exceptions.ResourceNotFoundException;
 import CarRental.CarRental.model.Customer;
 import CarRental.CarRental.repositories.CustomerRepository;
 import CarRental.CarRental.service.CustomerService;

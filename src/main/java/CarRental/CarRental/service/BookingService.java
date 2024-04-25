@@ -65,8 +65,21 @@ public class BookingService implements BookingServiceInterface {
     public void cancelBooking(int bookingId) {
         Optional<Bookings> optionalBooking = bookingRepository.findById(bookingId);
         optionalBooking.ifPresent(booking -> {
-            booking.setActive(false);
+            booking.setActive(false); // Deactivate the booking
+            // Unlink the car from the booking
+            Car car = booking.getCar();
+            if (car != null) {
+                car.removeBooking(booking); // Assuming you have a method to remove a booking from the car
+                booking.setCar(null);
+            }
+            // Unlink the customer from the booking
+            Customer customer = booking.getCustomer();
+            if (customer != null) {
+                customer.removeBooking(booking); // Assuming you have a method to remove a booking from the customer
+                booking.setCustomer(null);
+            }
             bookingRepository.save(booking);
         });
     }
+
 }

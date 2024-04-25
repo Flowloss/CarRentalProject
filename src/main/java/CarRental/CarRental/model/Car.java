@@ -3,7 +3,9 @@ package CarRental.CarRental.model;
 
 import jakarta.persistence.*;
 
-        @Entity
+import java.util.List;
+
+@Entity
         @Table(name = "cars")
         public class Car {
             @Id
@@ -16,7 +18,19 @@ import jakarta.persistence.*;
             private double pricePerDay;
             private boolean booked;
 
-            // Getters and setters
+
+            @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
+            private List<Bookings> bookings;
+
+        public void removeBooking(Bookings booking) {
+            if (bookings != null) {
+                bookings.remove(booking);
+                booking.setCar(null); // Ensure bidirectional relationship is properly updated
+            }
+        }
+
+
+
 
             public int getId() {
                 return id;

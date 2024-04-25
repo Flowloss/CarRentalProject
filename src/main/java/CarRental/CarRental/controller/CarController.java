@@ -15,7 +15,7 @@ public class CarController {
     @Autowired
     CarServiceInterface carService;
 
-    @GetMapping("/api/v1/car")
+    @GetMapping("/api/v1/cars")
     public ResponseEntity<List<Car>> getAllCar() {
         return ResponseEntity.ok(carService.getCar());
     }
@@ -35,4 +35,3 @@ public class CarController {
         return ResponseEntity.ok(carService.deleteCar(id));
     }
 }
-

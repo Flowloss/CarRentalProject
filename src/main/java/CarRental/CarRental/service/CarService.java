@@ -1,6 +1,6 @@
 package CarRental.CarRental.service;
 
-import CarRental.CarRental.Exceptions.ResourceNotFoundException;
+import CarRental.CarRental.exceptions.ResourceNotFoundException;
 import CarRental.CarRental.model.Car;
 import CarRental.CarRental.repositories.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
