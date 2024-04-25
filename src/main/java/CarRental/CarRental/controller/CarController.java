@@ -2,39 +2,37 @@ package CarRental.CarRental.controller;
 
 import CarRental.CarRental.model.Car;
 import CarRental.CarRental.service.CarService;
+import CarRental.CarRental.service.CarServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/")
 public class CarController {
-
-    private final CarService carService;
-
     @Autowired
-    public CarController(CarService carService) {
-        this.carService = carService;
+    CarServiceInterface carService;
+
+    @GetMapping("/api/v1/cars")
+    public ResponseEntity<List<Car>> getAllCar() {
+        return ResponseEntity.ok(carService.getCar());
     }
 
-    @GetMapping("/cars")
-    public List<Car> getAllCars() {
-        return carService.getAllCars();
+    @PostMapping("/api/v1/addCar")
+    public ResponseEntity<Car> addNewCar(@Validated @RequestBody Car car) {
+        return ResponseEntity.ok(carService.addCar(car));
     }
 
-    @PostMapping("addcar")
-    public Car addCar(@RequestBody Car car) {
-        return carService.addCar(car);
+    @PutMapping("/api/v1/updateCar/{id}")
+    public ResponseEntity<Car> updateCar(@Validated @RequestBody Car car, @PathVariable int id) {
+        return ResponseEntity.ok(carService.updateCar(car, id));
     }
 
-    @PutMapping("/{id}")
-    public Car updateCar(@PathVariable int id, @RequestBody Car car) {
-        return carService.updateCar(id, car);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteCar(@PathVariable int id) {
-        carService.deleteCar(id);
+    @DeleteMapping("/api/v1/deleteCar/{id}")
+    public ResponseEntity<Boolean> deleteCar(@PathVariable int id) {
+        return ResponseEntity.ok(carService.deleteCar(id));
     }
 }
+
