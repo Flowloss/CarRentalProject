@@ -1,14 +1,17 @@
 package CarRental.CarRental.service;
 
+import CarRental.CarRental.Exceptions.ResourceNotFoundException;
 import CarRental.CarRental.model.Car;
 import CarRental.CarRental.repositories.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class CarService {
+public class CarService implements CarServiceInterface {
 
     private final CarRepository carRepository;
 
@@ -17,33 +20,45 @@ public class CarService {
         this.carRepository = carRepository;
     }
 
-    public List<Car> getAllCars() {
+    @Override
+    public List<Car> getCar() {
         return carRepository.findAll();
     }
 
+    @Override
+    public Car getCar(int id) {
+        return carRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Car", "id", carRepository.existsById(id)));
+    }
+
+    @Override
     public Car addCar(Car car) {
-        // Lägg till eventuell affärslogik här innan du sparar bilen
         return carRepository.save(car);
     }
 
-    public Car updateCar(int id, Car car) {
-        // Här kan du lägga till validering eller annan logik innan du uppdaterar bilen
-        Car existingCar = carRepository.findById(Math.toIntExact(id)).orElse(null);
-        if (existingCar != null) {
-            // Uppdatera befintlig bil med information från den inkommande bilen
-            existingCar.setBrand(car.getBrand());
-            existingCar.setModel(car.getModel());
-            existingCar.setRegistrationNumber(car.getRegistrationNumber());
-            existingCar.setPricePerDay(car.getPricePerDay());
-            existingCar.setBooked(car.isBooked());
-            return carRepository.save(existingCar);
-        } else {
-            return null; // Bil med angivet id hittades inte
+    @Override
+    public Car updateCar(Car car, int id) {
+        Optional<Car> carToUpdate = carRepository.findById(id);
+        if (carToUpdate.isPresent()) {
+            Car updatedCar = carToUpdate.get();
+            updatedCar.setBrand(car.getBrand());
+            updatedCar.setModel(car.getModel());
+            updatedCar.setRegistrationNumber(car.getRegistrationNumber());
+            updatedCar.setRegistrationNumber(car.getRegistrationNumber());
+            return carRepository.save(updatedCar);
         }
+        throw new ResourceNotFoundException("Car", "id", car.getId());
     }
 
-    public void deleteCar(int id) {
-        carRepository.deleteById(Math.toIntExact(id));
+    @Override
+    public boolean deleteCar(int id) {
+        try {
+            if (carRepository.existsById(id)) {
+                carRepository.deleteById(id);
+                return true;
+            }
+        } catch (EmptyResultDataAccessException ex) {
+            return false;
+        }
+        throw new ResourceNotFoundException("Car", "id", id);
     }
 }
-
