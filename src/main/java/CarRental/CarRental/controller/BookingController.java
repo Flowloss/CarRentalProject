@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class BookingController {
 
-    private static final Logger log = LogManager.getLogger(BookingController.class);
+    private static final Logger logger = LogManager.getLogger("changes");
 
 
     @Autowired
@@ -40,14 +40,12 @@ public class BookingController {
     @GetMapping("/orders")
     public ResponseEntity<List<Bookings>> listOrders(){
         List<Bookings> orders = bookingServiceInterface.getAllOrders();
-        log.info("Retrieved {} orders", orders.size());
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteorder/{bookingId}")
     public ResponseEntity<String> deleteOrder(@PathVariable int bookingId) {
         bookingService.deleteOrder(bookingId);
-        log.info("Deleted order with ID: {}", bookingId);
         return ResponseEntity.ok("Order raderad.");
     }
 
@@ -57,7 +55,6 @@ public class BookingController {
         Car car = carRepository.findById(bookingRequest.getCarId()).orElse(null);
 
         if (customer == null || car == null) {
-            log.error("Kund eller bil hittades inte för bokning: {}", bookingRequest);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Kund eller bil hittades inte.");
         }
 
@@ -66,21 +63,18 @@ public class BookingController {
         newBooking.setCar(car);
 
         bookingService.ordercar(newBooking, customer, car);
-        log.info("Ny bokning skapad: {}", newBooking);
         return ResponseEntity.ok("Bokning sparad.");
     }
 
     @GetMapping("/myorders/{customerId}")
     public ResponseEntity<List<Bookings>> getMyOrders(@PathVariable int customerId) {
         List<Bookings> myOrders = bookingService.getMyOrders(customerId);
-        log.info("Retrieved {} orders for customer with ID: {}", myOrders.size(), customerId);
         return ResponseEntity.ok(myOrders);
     }
 
     @PutMapping("/cancelorder/{bookingId}")
     public ResponseEntity<String> cancelBooking(@PathVariable int bookingId) {
         bookingService.cancelBooking(bookingId);
-        log.info("Canceled booking with ID: {}", bookingId);
         return ResponseEntity.ok("Bokning avbruten.");
     }
 }

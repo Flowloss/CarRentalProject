@@ -35,11 +35,6 @@ public class BookingService implements BookingServiceInterface {
         }
     }
 
-    public Bookings getOrderById(int id) {
-        Optional<Bookings> optionalOrder = bookingRepository.findById(id);
-        return optionalOrder.orElse(null);
-    }
-
     public void ordercar(Bookings newBooking, Customer customer, Car car) {
         // Set the customer and car for the new booking
         newBooking.setCustomer(customer);
