@@ -69,4 +69,3 @@ import jakarta.persistence.*;
             }
 
         }
-

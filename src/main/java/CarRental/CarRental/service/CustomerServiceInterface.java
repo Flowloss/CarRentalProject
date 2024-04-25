@@ -9,7 +9,10 @@ public interface CustomerServiceInterface {
     List<Customer>getCustomers();
     Customer getCustomer(int id);
     Customer addCustomer(Customer customer);
-    Customer upDateCustomer(Customer customer, int id);
+
+    Customer updateCustomer(Customer customer, int id);
 
     boolean deleteCustomer(int id);
+
+
 }
