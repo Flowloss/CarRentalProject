@@ -18,22 +18,22 @@ public class CarController {
         this.carService = carService;
     }
 
-    @GetMapping("/cars")
+    @GetMapping("/allcars")
     public List<Car> getAllCars() {
         return carService.getAllCars();
     }
 
-    @PostMapping("addcar")
+    @PostMapping("/addcar")
     public Car addCar(@RequestBody Car car) {
         return carService.addCar(car);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updatecar/{id}")
     public Car updateCar(@PathVariable int id, @RequestBody Car car) {
         return carService.updateCar(id, car);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deletecar/{id}")
     public void deleteCar(@PathVariable int id) {
         carService.deleteCar(id);
     }
