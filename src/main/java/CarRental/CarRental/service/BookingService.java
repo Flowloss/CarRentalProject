@@ -4,6 +4,7 @@ import CarRental.CarRental.model.Bookings;
 import CarRental.CarRental.model.Car;
 import CarRental.CarRental.model.Customer;
 import CarRental.CarRental.repositories.BookingRepository;
+import CarRental.CarRental.repositories.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,9 @@ public class BookingService implements BookingServiceInterface {
 
     @Autowired
     private BookingRepository bookingRepository;
+
+    @Autowired
+    private CarRepository carRepository;
 
     @Override
     public List<Bookings> getAllOrders() {
@@ -46,9 +50,11 @@ public class BookingService implements BookingServiceInterface {
 
         // Set the booking as active
         newBooking.setActive(true);
+        car.setBooked(true);
 
         // Save the booking
         bookingRepository.save(newBooking);
+        carRepository.save(car);
     }
 
     public List<Bookings> getMyOrders(int customerId) {

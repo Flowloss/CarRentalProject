@@ -4,6 +4,7 @@ package CarRental.CarRental.model;
 import jakarta.persistence.*;
 
         @Entity
+        @Table(name = "cars")
         public class Car {
             @Id
             @GeneratedValue(strategy = GenerationType.IDENTITY)
