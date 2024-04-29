@@ -1,5 +1,7 @@
 package CarRental.CarRental.service;
 
+import CarRental.CarRental.exceptions.BookingAlreadyCanceledException;
+import CarRental.CarRental.exceptions.ResourceNotFoundException;
 import CarRental.CarRental.model.Bookings;
 import CarRental.CarRental.model.Car;
 import CarRental.CarRental.model.Customer;
@@ -13,8 +15,10 @@ import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 public class BookingService implements BookingServiceInterface {
+
 
     @Autowired
     private BookingRepository bookingRepository;
@@ -22,51 +26,48 @@ public class BookingService implements BookingServiceInterface {
     @Autowired
     private CarRepository carRepository;
 
-    @Override
     public List<Bookings> getAllOrders() {
         return bookingRepository.findAll();
     }
 
-    @Override
     public void deleteOrder(int id) {
-        Optional<Bookings> optionalBookings = bookingRepository.findById(id);
-        if (optionalBookings.isPresent()) {
+        Optional<Bookings> optionalBooking = bookingRepository.findById(id);
+        if (optionalBooking.isPresent()) {
             bookingRepository.deleteById(id);
+        } else {
+            throw new ResourceNotFoundException("Order", "BookingId", id);
         }
     }
 
-    public Bookings getOrderById(int id) {
-        Optional<Bookings> optionalOrder = bookingRepository.findById(id);
-        return optionalOrder.orElse(null);
-    }
 
     public void ordercar(Bookings newBooking, Customer customer, Car car) {
-        // Set the customer and car for the new booking
         newBooking.setCustomer(customer);
         newBooking.setCar(car);
-
-        // Set the order date to the current date and time
         newBooking.setOrderDate(new Date(Calendar.getInstance().getTimeInMillis()));
-
-        // Set the booking as active
         newBooking.setActive(true);
         car.setBooked(true);
-
-        // Save the booking
         bookingRepository.save(newBooking);
         carRepository.save(car);
     }
 
     public List<Bookings> getMyOrders(int customerId) {
-        // Retrieve all orders (active and inactive) for the specified customer
         return bookingRepository.findByCustomerId(customerId);
     }
 
     public void cancelBooking(int bookingId) {
         Optional<Bookings> optionalBooking = bookingRepository.findById(bookingId);
-        optionalBooking.ifPresent(booking -> {
-            booking.setActive(false);
-            bookingRepository.save(booking);
-        });
+        if (optionalBooking.isPresent()) {
+            Bookings booking = optionalBooking.get();
+            if (booking.isActive()) {
+                booking.setActive(false);
+                bookingRepository.save(booking);
+            } else {
+                throw new BookingAlreadyCanceledException("CancelOrder", "BookingId", bookingId);
+            }
+        } else {
+            throw new ResourceNotFoundException("CancelOrder", "BookingId", bookingId);
+        }
     }
+
+
 }

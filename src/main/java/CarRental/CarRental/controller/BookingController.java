@@ -8,8 +8,7 @@ import CarRental.CarRental.repositories.CarRepository;
 import CarRental.CarRental.repositories.CustomerRepository;
 import CarRental.CarRental.service.BookingService;
 import CarRental.CarRental.service.BookingServiceInterface;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,7 @@ import java.util.List;
 @RequestMapping("/api/v1")
 public class BookingController {
 
-    private static final Logger log = LogManager.getLogger(BookingController.class);
+    private static final Logger logger = Logger.getLogger(BookingController.class);
 
 
     @Autowired
@@ -38,27 +37,29 @@ public class BookingController {
     private BookingService bookingService;
 
     @GetMapping("/orders")
-    public ResponseEntity<List<Bookings>> listOrders(){
-        List<Bookings> orders = bookingServiceInterface.getAllOrders();
-        log.info("Retrieved {} orders", orders.size());
+    public ResponseEntity<List<Bookings>> listOrders() {
+        logger.info("Fetching all orders");
+        List<Bookings> orders = bookingService.getAllOrders();
         return new ResponseEntity<>(orders, HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteorder/{bookingId}")
     public ResponseEntity<String> deleteOrder(@PathVariable int bookingId) {
+        logger.info("Deleting order with ID: {}");
         bookingService.deleteOrder(bookingId);
-        log.info("Deleted order with ID: {}", bookingId);
-        return ResponseEntity.ok("Order raderad.");
+        logger.info("Order deleted successfully");
+        return ResponseEntity.ok("Order deleted.");
     }
 
     @PostMapping("/ordercar")
     public ResponseEntity<String> saveBooking(@RequestBody BookingRequest bookingRequest) {
+        logger.info("Processing booking request");
         Customer customer = customerRepository.findById(bookingRequest.getCustomerId()).orElse(null);
         Car car = carRepository.findById(bookingRequest.getCarId()).orElse(null);
 
         if (customer == null || car == null) {
-            log.error("Kund eller bil hittades inte för bokning: {}", bookingRequest);
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Kund eller bil hittades inte.");
+            logger.warn("Invalid customer or car ID provided in booking request");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Customer or car not found.");
         }
 
         Bookings newBooking = new Bookings();
@@ -66,22 +67,23 @@ public class BookingController {
         newBooking.setCar(car);
 
         bookingService.ordercar(newBooking, customer, car);
-        log.info("Ny bokning skapad: {}", newBooking);
-        return ResponseEntity.ok("Bokning sparad.");
+        logger.info("Booking created successfully");
+        return ResponseEntity.ok("Booking saved.");
     }
 
     @GetMapping("/myorders/{customerId}")
     public ResponseEntity<List<Bookings>> getMyOrders(@PathVariable int customerId) {
+        logger.info("Fetching orders for customer with ID: {}");
         List<Bookings> myOrders = bookingService.getMyOrders(customerId);
-        log.info("Retrieved {} orders for customer with ID: {}", myOrders.size(), customerId);
         return ResponseEntity.ok(myOrders);
     }
 
     @PutMapping("/cancelorder/{bookingId}")
     public ResponseEntity<String> cancelBooking(@PathVariable int bookingId) {
+        logger.info("Canceling booking with ID: {}");
         bookingService.cancelBooking(bookingId);
-        log.info("Canceled booking with ID: {}", bookingId);
-        return ResponseEntity.ok("Bokning avbruten.");
+        logger.info("Booking canceled successfully");
+        return ResponseEntity.ok("Booking canceled.");
     }
 }
 
