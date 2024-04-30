@@ -1,6 +1,5 @@
 package CarRental.CarRental.controller;
 
-
 import CarRental.CarRental.model.Bookings;
 import CarRental.CarRental.model.Car;
 import CarRental.CarRental.model.Customer;

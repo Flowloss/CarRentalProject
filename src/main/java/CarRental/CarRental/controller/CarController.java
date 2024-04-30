@@ -28,7 +28,7 @@ public class CarController {
         return ResponseEntity.ok(cars);
     }
 
-    @PostMapping("/addCar")
+    @PostMapping("/addcar")
     public ResponseEntity<Car> addNewCar(@Validated @RequestBody Car car) {
         logger.info("Adding new car: {}", car);
         Car addedCar = carService.addCar(car);
@@ -36,7 +36,7 @@ public class CarController {
         return ResponseEntity.ok(addedCar);
     }
 
-    @PutMapping("/updateCar/{id}")
+    @PutMapping("/updatecar/{id}")
     public ResponseEntity<Car> updateCar(@Validated @RequestBody Car car, @PathVariable int id) {
         logger.info("Updating car with ID: {}", id);
         Car updatedCar = carService.updateCar(car, id);
@@ -48,7 +48,7 @@ public class CarController {
         return ResponseEntity.ok(updatedCar);
     }
 
-    @DeleteMapping("/deleteCar/{id}")
+    @DeleteMapping("/deletecar/{id}")
     public ResponseEntity<Boolean> deleteCar(@PathVariable int id) {
         logger.info("Deleting car with ID: {}", id);
         boolean deleted = carService.deleteCar(id);
