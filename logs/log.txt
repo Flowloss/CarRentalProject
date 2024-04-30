@@ -1,10 +1,54 @@
-2024-04-29 11:53:08,336 * INFO * CarRental.CarRental.controller.BookingController * deleteOrder * User Deleted Order
-2024-04-29 11:53:10,596 * INFO * CarRental.CarRental.controller.BookingController * deleteOrder * User Deleted Order
-2024-04-29 11:53:12,327 * INFO * CarRental.CarRental.controller.BookingController * deleteOrder * User Deleted Order
-2024-04-29 11:53:54,833 * INFO * CarRental.CarRental.controller.BookingController * deleteOrder * User Deleted Order
-2024-04-29 11:54:03,695 * INFO * CarRental.CarRental.controller.BookingController * deleteOrder * User Deleted Order
-2024-04-29 11:54:18,901 * INFO * CarRental.CarRental.controller.BookingController * deleteOrder * User Deleted Order
-2024-04-29 11:59:02,216 * INFO * CarRental.CarRental.controller.BookingController * deleteOrder * Deleted order with ID: {}
-2024-04-29 11:59:13,482 * INFO * CarRental.CarRental.controller.BookingController * listOrders * Listing all orders
-2024-04-29 12:12:11,722 * INFO * CarRental.CarRental.controller.BookingController * deleteOrder * Deleting order with ID: {}
-2024-04-29 12:12:11,814 * INFO * CarRental.CarRental.controller.BookingController * deleteOrder * Order deleted successfully
+2024-04-30 10:29:30,412 * INFO * CarRental.CarRental.controller.BookingController * listOrders * Fetching all orders
+2024-04-30 10:30:01,297 * INFO * CarRental.CarRental.controller.BookingController * cancelBooking * Canceling booking with ID: {}
+2024-04-30 10:30:01,301 * INFO * CarRental.CarRental.controller.BookingController * cancelBooking * Booking canceled successfully
+2024-04-30 10:30:20,086 * INFO * CarRental.CarRental.controller.BookingController * deleteOrder * Deleting order with ID: {}
+2024-04-30 10:30:20,091 * INFO * CarRental.CarRental.controller.BookingController * deleteOrder * Order deleted successfully
+2024-04-30 10:31:08,497 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:31:08,502 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Booking created successfully
+2024-04-30 10:31:30,271 * INFO * CarRental.CarRental.controller.BookingController * getMyOrders * Fetching orders for customer with ID: {}
+2024-04-30 10:32:08,931 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:32:08,935 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Booking created successfully
+2024-04-30 10:32:19,566 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:32:19,569 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Booking created successfully
+2024-04-30 10:34:35,243 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:34:35,351 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Booking created successfully
+2024-04-30 10:34:43,507 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:35:28,321 * INFO * CarRental.CarRental.controller.BookingController * cancelBooking * Canceling booking with ID: {}
+2024-04-30 10:35:28,326 * INFO * CarRental.CarRental.controller.BookingController * cancelBooking * Booking canceled successfully
+2024-04-30 10:35:37,097 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:37:26,850 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:37:26,998 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Booking created successfully
+2024-04-30 10:37:37,430 * INFO * CarRental.CarRental.controller.BookingController * cancelBooking * Canceling booking with ID: {}
+2024-04-30 10:37:37,435 * INFO * CarRental.CarRental.controller.BookingController * cancelBooking * Booking canceled successfully
+2024-04-30 10:37:45,926 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:38:07,878 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:38:11,262 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:38:18,043 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:38:18,048 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Booking created successfully
+2024-04-30 10:38:21,014 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:38:23,721 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:40:06,507 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:40:06,669 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Booking created successfully
+2024-04-30 10:40:18,782 * INFO * CarRental.CarRental.controller.BookingController * cancelBooking * Canceling booking with ID: {}
+2024-04-30 10:40:18,788 * INFO * CarRental.CarRental.controller.BookingController * cancelBooking * Booking canceled successfully
+2024-04-30 10:40:29,603 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:40:36,481 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:42:31,859 * INFO * CarRental.CarRental.controller.BookingController * cancelBooking * Canceling booking with ID: {}
+2024-04-30 10:42:31,861 * INFO * CarRental.CarRental.controller.BookingController * cancelBooking * Booking canceled successfully
+2024-04-30 10:45:02,663 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:45:02,837 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Booking created successfully
+2024-04-30 10:45:14,759 * INFO * CarRental.CarRental.controller.BookingController * cancelBooking * Canceling booking with ID: {}
+2024-04-30 10:45:14,764 * INFO * CarRental.CarRental.controller.BookingController * cancelBooking * Booking canceled successfully
+2024-04-30 10:45:25,566 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:45:25,571 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Booking created successfully
+2024-04-30 10:46:08,390 * INFO * CarRental.CarRental.controller.BookingController * cancelBooking * Canceling booking with ID: {}
+2024-04-30 10:46:08,392 * INFO * CarRental.CarRental.controller.BookingController * cancelBooking * Booking canceled successfully
+2024-04-30 10:46:25,833 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:46:25,838 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Booking created successfully
+2024-04-30 10:46:51,613 * INFO * CarRental.CarRental.controller.BookingController * getMyOrders * Fetching orders for customer with ID: {}
+2024-04-30 10:48:16,176 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:48:16,181 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Booking created successfully
+2024-04-30 10:48:30,297 * INFO * CarRental.CarRental.controller.BookingController * cancelBooking * Canceling booking with ID: {}
+2024-04-30 10:48:30,300 * INFO * CarRental.CarRental.controller.BookingController * cancelBooking * Booking canceled successfully
+2024-04-30 10:48:40,683 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Processing booking request
+2024-04-30 10:48:40,687 * INFO * CarRental.CarRental.controller.BookingController * saveBooking * Booking created successfully

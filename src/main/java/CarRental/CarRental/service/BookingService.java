@@ -41,11 +41,23 @@ public class BookingService implements BookingServiceInterface {
 
 
     public void ordercar(Bookings newBooking, Customer customer, Car car) {
+
         newBooking.setCustomer(customer);
         newBooking.setCar(car);
         newBooking.setOrderDate(new Date(Calendar.getInstance().getTimeInMillis()));
         newBooking.setActive(true);
+
+        if (car.isBooked()) {
+            throw new ResourceNotFoundException("Car", "id", car.getId());
+        }
+
+        Bookings previousBooking = bookingRepository.findTopByCarOrderByOrderDateDesc(car);
+        if (previousBooking != null && previousBooking.isActive()) {
+            throw new IllegalStateException("Previous booking for the car was not canceled");
+        }
+
         car.setBooked(true);
+
         bookingRepository.save(newBooking);
         carRepository.save(car);
     }
@@ -61,6 +73,11 @@ public class BookingService implements BookingServiceInterface {
             if (booking.isActive()) {
                 booking.setActive(false);
                 bookingRepository.save(booking);
+
+                Car car = booking.getCar();
+                car.setBooked(false);
+                carRepository.save(car);
+
             } else {
                 throw new BookingAlreadyCanceledException("CancelOrder", "BookingId", bookingId);
             }
@@ -68,6 +85,7 @@ public class BookingService implements BookingServiceInterface {
             throw new ResourceNotFoundException("CancelOrder", "BookingId", bookingId);
         }
     }
+
 
 
 }
