@@ -22,14 +22,6 @@ import java.util.List;
             @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
             private List<Bookings> bookings;
 
-        public void removeBooking(Bookings booking) {
-            if (bookings != null) {
-                bookings.remove(booking);
-                booking.setCar(null); // Ensure bidirectional relationship is properly updated
-            }
-        }
-
-
 
 
             public int getId() {

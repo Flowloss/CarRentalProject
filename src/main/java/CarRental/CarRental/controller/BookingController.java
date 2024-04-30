@@ -7,7 +7,6 @@ import CarRental.CarRental.model.Customer;
 import CarRental.CarRental.repositories.CarRepository;
 import CarRental.CarRental.repositories.CustomerRepository;
 import CarRental.CarRental.service.BookingService;
-import CarRental.CarRental.service.BookingServiceInterface;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,9 +22,6 @@ public class BookingController {
 
     private static final Logger logger = Logger.getLogger(BookingController.class);
 
-
-    @Autowired
-    private BookingServiceInterface bookingServiceInterface;
 
     @Autowired
     private CustomerRepository customerRepository;

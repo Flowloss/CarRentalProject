@@ -23,28 +23,10 @@ public class Customer {
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private List<Bookings> bookings;
 
-    // Constructor, getters, and setters
 
-    public void removeBooking(Bookings booking) {
-        if (bookings != null) {
-            bookings.remove(booking);
-            booking.setCustomer(null); // Ensure bidirectional relationship is properly updated
-        }
-    }
-
-
-    // Constructors
     public Customer() {
     }
 
-    public Customer(String name, String address, String email, String phone) {
-        this.name = name;
-        this.address = address;
-        this.email = email;
-        this.phone = phone;
-    }
-
-    // Getters and Setters
     public int getId() {
         return id;
     }
